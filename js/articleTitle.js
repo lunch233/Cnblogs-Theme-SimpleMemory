@@ -95,7 +95,7 @@ $(document).ready(function () {
 			}
 			var th3Html = '<b class="dev__fe"><i>'+last+'</i></b>';
 			th3Html += '<span class="dev__slash">|</span>';
-			th3Html += '<b class="dev__ux"><i>'+(++num)+'</i></b>';
+			th3Html += '<b class="dev__ux"><i>'+(num += 2)+'</i></b>';
 			th3Html += '<b class="dev__developer"><span class="dev__title">'+th3Text+'</span></b>';
 			th3.append(th3Html);
 			th3.parents('.header__span').after('<br>');
