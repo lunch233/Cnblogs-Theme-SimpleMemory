@@ -3,13 +3,15 @@ $(document).ready(function () {
         cparent = 'cnblogs_post_body',
         ch1,
         ch2,
+        ch3
         s = $('#' + cparent);
     if (s.length === 0) {
         return
     }
     ch1 = s.find('h1');
     ch2 = s.find('h2');
-
+    ch3 = s.find('h3');
+    
     if (ch1.length > 0) {
         for (var i = 0; i < ch1.length; i++) {
             var th1 = $(ch1[i]);
@@ -70,4 +72,41 @@ $(document).ready(function () {
             ) ;
         }
     }
+    
+    if (ch3.length > 0) {
+        var num  = 0;
+		var last = 0;
+		for (i = 0; i < ch3.length; i++) {
+			var th3 = $(ch3[i]);
+			th3.wrap('<span title-type="h3" class="header__span"></span>');
+			var th3Text = th3.text();
+			th3.text('');
+			th3.addClass('header__dev');
+			var their = th3.parents('.header__span').prevAll('.header__span[title-type="h1"]');
+			if (their.length > 0) {
+				their = $(their[0]);
+				var current  = their.find('.dev__fe i').text();
+				if (current != last) {
+					num  = 0;
+				}
+				last = current;
+			} else {
+				num = 0;
+			}
+			var th3Html = '<b class="dev__fe"><i>'+last+'</i></b>';
+			th3Html += '<span class="dev__slash">|</span>';
+			th3Html += '<b class="dev__ux"><i>'+(++num)+'</i></b>';
+			th3Html += '<b class="dev__developer"><span class="dev__title">'+th3Text+'</span></b>';
+			th3.append(th3Html);
+			th3.parents('.header__span').after('<br>');
+			th3.parent(".header__span").hover(
+				function(){
+					$(this).find('.header__dev').addClass("header__dev--open");
+				} ,
+				function(){
+					$(this).find('.header__dev').removeClass("header__dev--open");
+				}
+			) ;
+		}
+	}
 });
